@@ -62,7 +62,7 @@ function TableBox({ searched }) {
     setIsVisible(true)
     setError("")
     axios
-      .get(`http://swapi.dev/api/people/?page=${selectedPage}`)
+      .get(`https://swapi.dev/api/people/?page=${selectedPage}`)
       .then(res => {
         setResArray(prev => {
           prev = res.data.results
