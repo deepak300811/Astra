@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css"
+import Header from "./components/Header"
+import InputAndTable from "./components/InputAndTable"
+import { SpinnerContext } from "./contexts/SpinnerContext"
+import { ErrorContext } from "./contexts/ErrorContext"
+import Spinner from "./components/Spinner"
+import ErrorPage from "./components/ErrorPage"
+import { useState } from "react"
 function App() {
+  const [isVisible, setIsVisible] = useState(false)
+  const [Error, setError] = useState("")
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App position-relative">
+      <SpinnerContext.Provider value={{ isVisible, setIsVisible }}>
+        <ErrorContext.Provider value={{ Error, setError }}>
+          <Header />
+          <div className="position-relative">
+            <ErrorPage />
+            <Spinner />
+          </div>
+
+          <InputAndTable />
+        </ErrorContext.Provider>
+      </SpinnerContext.Provider>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
